@@ -1,41 +1,28 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import logo from './logo.svg';
-import './App.css';
-import { simpleAction } from './actions/action';
+import React, {Component} from 'react';
 
-const mapStateToProps = state => ({
-  ...state
-});
+import {HashRouter as Router, Switch} from 'react-router-dom';
+import { Route } from 'react-router';
 
-const mapDispatchToProps = dispatch => ({
-  simpleAction: () => dispatch(simpleAction())
-});
+import LoginPage from './components/loginPage/loginPage'
+import RegisterPage from './components/registerPage/registerPage'
 
-class App extends Component {
-  simpleAction = (event) => {
-    this.props.simpleAction();
-    console.log(this.props);
-  }
+
+
+
+
+export default class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload
-    </p>
-        <button onClick={this.simpleAction}>Test redux action</button>
-        <pre>
-          {
-            JSON.stringify(this.props)
-          }
-        </pre>
-      </div>
+      <Router basename="/submission">
+        <div className="container">
+          <Switch>
+          <Route exact path="/register" component={RegisterPage} />
+          <Route exact path="/" component={LoginPage} />
+          </Switch>
+        </div>
+      </Router>
     );
+    
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(App);
