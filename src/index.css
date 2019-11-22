@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Fjalla+One&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 
 body {
   margin: 0;
@@ -13,3 +14,34 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+html, body{
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: #e1ddd9;
+}
+
+body:before {
+  content: '';
+  position: absolute;
+  top: -50%; left: 0; right: 0;
+  height:100%;
+  background:#e9e7e5;
+  transform: skew(0deg, 9deg);
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+* {
+  z-index: 1;   /* so that nothing gets hidden by the body:before */ 
+}
+

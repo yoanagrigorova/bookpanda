@@ -96,7 +96,7 @@ class LoginPage extends Component {
           '&:hover': {
             backgroundColor: 'none',
             border: 'none',
-            borderBottom: '2px solid #f2935c',
+            borderBottom: '2px solid tomato',
           },
           '&$disabled': {
             border: 'none',
@@ -105,11 +105,11 @@ class LoginPage extends Component {
         containedPrimary: {
           padding: '0.3em 1.5em 0.3em 1.5em',
           backgroundColor: '#f2935c',
-          color: 'black',
+          color: 'white',
           boxShadow: 'none',
           fontWeight: 'bold',
           '&:hover': {
-            backgroundColor: 'white',
+            backgroundColor: 'tomato',
             boxShadow: 'none',
           }
         },
@@ -144,15 +144,24 @@ class LoginPage extends Component {
           password: '',
           error: '',
         };
+
+        this.handleChange = this.handleChange.bind(this);
       }
 
+      handleChange(event) {
+        const name = event.target.name;
+        this.setState({
+          [name]: event.target.value,
+          error: ''
+        });
+      }
 
       render() {
           return ( 
               <div className="loginContainer">
                 <MuiThemeProvider theme={this.getMuiTheme()}>
                   <div className="loginForm">
-                  <div className="logo">
+                  <div className="loginLogo">
                 <span> Welcome to Bookpanda! </span>
               </div>
               <Paper className="loginPaper">
@@ -161,6 +170,8 @@ class LoginPage extends Component {
                     autoFocus
                     fullWidth
                     required
+                    value = {this.state.username}
+                    onChange = {this.handleChange}
                     name="username"
                     margin="dense"
                     label="Email"
@@ -169,6 +180,8 @@ class LoginPage extends Component {
                   <TextField
                     fullWidth
                     required
+                    value = {this.state.password}
+                    onChange = {this.handleChange}
                     name="password"
                     margin="dense"
                     label="Password"

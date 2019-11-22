@@ -1,0 +1,53 @@
+.homePage {
+    height: 100%;
+    width: 100%;
+}
+
+.header {
+    align-self: flex-start;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.logo {
+    font-family: 'Fjalla One', sans-serif;
+    font-weight: 200;
+    font-size: 2em;
+}
+
+.navigationList {
+    display: flex;
+}
+
+.navigationList li a {
+    position: relative;
+    color: white;
+    text-decoration: none;
+    outline: none;
+    border: none;
+}
+
+
+.navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.header { 
+    display: flex;
+    align-items: center;
+    padding: 1em;
+    box-sizing: border-box;
+    background-color: #2c4026;
+    color: white;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.20), 0 15px 12px rgba(0,0,0,0.15);
+}
+
+li {
+    margin: 0 2em 0 1em;
+    list-style-type: none;
+}
