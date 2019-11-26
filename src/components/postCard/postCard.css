@@ -1,0 +1,55 @@
+/* --- postCard styles --- */
+
+.postCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 1em 2em 1em;
+    width: 270px;
+    height: 500px;
+    background: white;
+    box-shadow:  0 14px 28px rgba(0, 0, 0, 0.096), 0 10px 10px rgba(0, 0, 0, 0.082);
+}
+
+.postTitle {
+    margin: 20px 20px 10px 20px;
+    text-align: center;
+    font-family:  'PT Serif', serif;
+    font-size: 1.5em;
+}
+
+.postAuthor {
+    margin: 0 20px 0 20px;
+    align-self: flex-start;
+    color: #f2935c;
+    font-family: 'Monsterrat', sans-serif;
+    text-transform: uppercase;
+}
+
+.postSampleText {
+    margin: 20px;
+    text-align: center;
+    font-family: 'Monsterrat', sans-serif;
+    color: rgba(0, 0, 0, 0.432);
+    height: 200px;
+    overflow-y: auto;
+}
+
+.postDate {
+    margin: 10px 0 10px 0;
+    padding: 10px 0 10px 0;
+    font-family: 'Monsterrat', sans-serif;
+    color: rgba(0, 0, 0, 0.432);
+    border-top: 2px solid #f2935c;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+@media only screen and (max-width: 768px) {
+    .postCard {
+        margin: 0 1em 2em 1em;
+        width: 300px;
+    }
+}

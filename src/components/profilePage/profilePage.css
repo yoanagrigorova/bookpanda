@@ -4,13 +4,14 @@
     grid-template-rows: 100%;
     grid-template-areas: "userProfile userPosts";
     grid-gap: 50px;
-    height: 100%;
+    height: calc(100vh - 150px);
     width: 80%;
     margin: auto;
-    padding: 4em;
 }
 
 .userProfile {
+    position: sticky;
+    top: 0;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -51,6 +52,11 @@
 
 .userPosts {
     grid-area: userPosts;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    overflow-y: auto;
 }
 
 .numbers {
@@ -61,49 +67,23 @@
     height: 40%;
 }
 
-/* --- postCard styles --- */
-
-.postCard {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 270px;
-    background: white;
-    box-shadow:  0 14px 28px rgba(0, 0, 0, 0.096), 0 10px 10px rgba(0, 0, 0, 0.082);
+.submitPostButton {
+    padding: 0.5em;
+    margin-bottom: 1em;
 }
 
-.postTitle {
-    margin: 20px 20px 10px 20px;
-    text-align: center;
-    font-family:  'PT Serif', serif;
-    font-size: 1.5em;
-}
 
-.postAuthor {
-    margin: 0 20px 0 20px;
-    align-self: flex-start;
-    color: #f2935c;
-    font-family: 'Monsterrat', sans-serif;
-    text-transform: uppercase;
-}
+@media only screen and (max-width: 768px) {
+    .profilePage {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 60px 0;
+        width: 100%;
+    }
 
-.postSampleText {
-    margin: 20px;
-    text-align: center;
-    font-family: 'Monsterrat', sans-serif;
-    color: rgba(0, 0, 0, 0.432);
-    height: 200px;
-    overflow-y: auto;
-}
+    .userProfile {
+        position: relative;
+        width: 100%;
+    }
 
-.postDate {
-    margin: 10px 0 10px 0;
-    padding: 10px 0 10px 0;
-    font-family: 'Monsterrat', sans-serif;
-    color: rgba(0, 0, 0, 0.432);
-    border-top: 2px solid #f2935c;
-    width: 100%;
-    text-align: center;
-    box-sizing: border-box;
 }

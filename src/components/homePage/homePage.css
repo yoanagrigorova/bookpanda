@@ -9,6 +9,7 @@
     display: flex;
     justify-content: space-between;
     align-items: stretch;
+    height: 70px;
 }
 
 .logo {
@@ -28,7 +29,6 @@
     outline: none;
     border: none;
 }
-
 
 .navigation {
     display: flex;
@@ -50,4 +50,76 @@
 li {
     margin: 0 2em 0 1em;
     list-style-type: none;
+}
+
+.navigationPhone {
+    visibility: hidden;
+}
+
+.hamburgerButton {
+    display: none;
+}
+
+button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: white;
+}
+
+
+@media only screen and (max-width: 768px) {
+    .hamburgerButton {
+        display: block;
+    }
+
+    .navigationList {
+        display: none;
+    }
+
+    .navigationPhone {
+        visibility: visible;
+    }
+
+    .navigationListPhone {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 0;
+        width: 100%;
+        position: fixed;
+        top: 70px;
+        align-items: center;
+        background-color: #2c4026;
+        box-shadow: 0 19px 38px rgba(0,0,0,0.20), 0 15px 12px rgba(0,0,0,0.15);
+        z-index: 3;
+    }
+
+    .navigationListPhone li a {
+        color: white;
+        text-decoration: none;
+        outline: none;
+        border: none;
+    }
+
+    .navigationListPhone li {
+        font-family: 'Montserrat';
+        padding: 0.7em;
+    }
+
+    .navigationListPhone li:nth-child(odd) {
+        background: rgba(255, 255, 255, 0.041);
+        width: 100%;
+        text-align: center;
+    }
+
+    nav ul {
+        padding: 0;
+    }
+
+    header {
+        position: fixed;
+        z-index: 3;
+    }
+
 }

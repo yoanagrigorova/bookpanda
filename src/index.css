@@ -40,8 +40,31 @@ body:before {
   align-items: center;
 }
 
+button::-moz-focus-inner {
+  border: 0;
+}
 
 * {
   z-index: 1;   /* so that nothing gets hidden by the body:before */ 
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 2px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #f2935c; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background:#f2935c; 
+}
