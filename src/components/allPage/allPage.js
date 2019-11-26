@@ -2,11 +2,12 @@ import React, {Component} from 'react';
 import Button from '@material-ui/core/Button';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
 import FaceIcon from '@material-ui/icons/Face';
-import {HashRouter as Router, Switch, Link} from 'react-router-dom';
-import './profilePage.css';
+
 import PostCard from '../postCard/postCard';
 
-class profilePage extends Component {
+import './allPage.css';
+
+class AllPage extends Component {
 
   getMuiTheme = () => createMuiTheme({
     typography: {
@@ -54,32 +55,11 @@ class profilePage extends Component {
     render() {
           return(
             <MuiThemeProvider theme={this.getMuiTheme()}>
-              <div className="profilePage">
-                  <section className="userProfile">
-                    <span className="userId"><FaceIcon className="userIcon"></FaceIcon>UserId</span>
-                    <div className="followers">
-                      <div className="label">
-                        subsribers:
-                      </div>
-                      <div className="numbers">
-                        256
-                      </div>
-                    </div>
-                    <div className="following">
-                      <div className="label">
-                        subsribed to:
-                      </div>
-                      <div className="numbers">
-                        305
-                      </div>
-                    </div>
-                    <div className="submitPostButton">
-                      <Button variant="outlined" color="primary">
-                        <Link to="/homePage/submitPage">Submit a post</Link>
-                      </Button>
-                    </div>
+              <div className="allPage">
+                  <section className="allTitle">
+                    All Posts
                   </section>
-                  <section className="userPosts">
+                  <section className="allPosts">
                   <PostCard 
                     title="Lorem ipsum dolor sit amet"
                     author="author"
@@ -171,4 +151,4 @@ class profilePage extends Component {
       }
 }
 
-export default profilePage
+export default AllPage

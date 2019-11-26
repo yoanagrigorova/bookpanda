@@ -54,6 +54,7 @@ li {
 
 .navigationPhone {
     visibility: hidden;
+    height: 0;
 }
 
 .hamburgerButton {
@@ -79,6 +80,7 @@ button {
 
     .navigationPhone {
         visibility: visible;
+        height: auto;
     }
 
     .navigationListPhone {
