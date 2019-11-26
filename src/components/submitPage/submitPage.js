@@ -8,10 +8,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
 import {HashRouter as Router, Switch, Link} from 'react-router-dom';
 import { Route } from 'react-router';
 
-import './loginPage.css'
-import SingUpPage from '../signUpPage/signUpPage';
-
-class LoginPage extends Component { 
+class SignUpPage extends Component { 
 
   getMuiTheme = () => createMuiTheme({
     typography: {
@@ -163,32 +160,33 @@ class LoginPage extends Component {
           return ( 
               <div className="loginContainer">
                 <MuiThemeProvider theme={this.getMuiTheme()}>
-                  <div className="loginForm">
-                  <div className="loginLogo">
-                <span> Welcome to Bookpanda! </span>
-              </div>
-              <Paper className="loginPaper">
-                <form className="loginForm" id="loginForm">
+                <section className="allTitle">
+                    Submit your post here:
+                  </section>
+              <Paper className="submitPaper">
+                <form className="submittForm" id="submitForm">
                   <TextField
                     autoFocus
                     fullWidth
                     required
-                    value = {this.state.username}
+                    value = {this.state.title}
                     onChange = {this.handleChange}
-                    name="email"
+                    name="title"
                     margin="dense"
-                    label="Email"
-                    type="email"
+                    label="Title"
+                    type="text"
                   />
                   <TextField
                     fullWidth
                     required
-                    value = {this.state.password}
+                    multiline
+                    rows={10}
+                    value = {this.state.content}
                     onChange = {this.handleChange}
-                    name="password"
+                    name="content"
                     margin="dense"
-                    label="Password"
-                    type="password"
+                    label="Content"
+                    type="text"
                   />
                   <div className="loginButton">
                     <Button
@@ -197,23 +195,18 @@ class LoginPage extends Component {
                       variant="contained" 
                       //disabled={!this.state.username || !this.state.password}
                      >
-                        Login
+                        Submit
                     </Button>
                   </div>
                 </form>
               </Paper>
-            </div>
             <div className="extraContent">
               <div className="loginErrors">
                 {
                   this.state.error &&
-                  <div className="error">Wrong username or password.</div>
+                  <div className="error">Something went wrong.</div>
                 }
               </div>
-              <Typography>Don`t have an account?</Typography>
-              <Button variant="outlined" color="primary">
-              <Link to="/signUp">Sign up</Link>
-              </Button>
               </div>
             </MuiThemeProvider>       
           </div>
@@ -222,4 +215,4 @@ class LoginPage extends Component {
 
 }
 
-export default LoginPage
+export default SignUpPage

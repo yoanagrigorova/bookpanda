@@ -1,0 +1,32 @@
+.allPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+}
+
+.allTitle { 
+    font-family: 'Montserrat';
+    font-weight: bold;
+    font-size: 2em;
+    padding: 0.5em;
+    margin: 1em 0 1.5em 0;
+    border-bottom: 3px solid #f2935c;
+}
+
+.allPosts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+
+}
+
+@media only screen and (max-width: 768px) {
+    .allTitle {
+        margin-top: 3em;
+    }
+}

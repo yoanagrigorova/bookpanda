@@ -1,27 +1,3 @@
-html, body{
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #e1ddd9;
-}
-
-body:before {
-    content: '';
-    position: absolute;
-    top: -50%; left: 0; right: 0;
-    height:100%;
-    background:#e9e7e5;
-    transform: skew(0deg, 9deg);
-    z-index: -1;
-}
-
-* {
-    z-index: 1;
-}
-
 .loginContainer, .loginForm, .extraContent {
     display: flex;
     flex-direction: column;
@@ -37,9 +13,16 @@ body:before {
     margin: 1em;
 }
 
-.logo {
+.loginLogo {
     margin: 1em;
     font-family: 'Fjalla One', sans-serif;
     font-weight: 200;
     font-size: 2em;
+}
+
+a {
+    text-decoration: none;
+    outline: none;
+    border: none;
+    color: black;
 }
