@@ -8,10 +8,8 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
 import {HashRouter as Router, Switch, Link} from 'react-router-dom';
 import { Route } from 'react-router';
 
-import './loginPage.css'
-import SingUpPage from '../signUpPage/signUpPage';
 
-class LoginPage extends Component { 
+class SignUpPage extends Component { 
 
   getMuiTheme = () => createMuiTheme({
     typography: {
@@ -143,7 +141,7 @@ class LoginPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          email: '',
+          username: '',
           password: '',
           error: '',
         };
@@ -180,6 +178,16 @@ class LoginPage extends Component {
                     label="Email"
                     type="email"
                   />
+                   <TextField
+                    fullWidth
+                    required
+                    value = {this.state.password}
+                    onChange = {this.handleChange}
+                    name="userid"
+                    margin="dense"
+                    label="Username"
+                    type="text"
+                  />
                   <TextField
                     fullWidth
                     required
@@ -196,8 +204,8 @@ class LoginPage extends Component {
                       color="primary"
                       variant="contained" 
                       //disabled={!this.state.username || !this.state.password}
-                     >
-                        Login
+                    >
+                        sign up
                     </Button>
                   </div>
                 </form>
@@ -210,16 +218,17 @@ class LoginPage extends Component {
                   <div className="error">Wrong username or password.</div>
                 }
               </div>
-              <Typography>Don`t have an account?</Typography>
+              <Typography>Already have an account?</Typography>
               <Button variant="outlined" color="primary">
-              <Link to="/signUp">Sign up</Link>
+              <Link to="/">Log in</Link>
               </Button>
               </div>
-            </MuiThemeProvider>       
-          </div>
+            </MuiThemeProvider>
+       
+              </div>
           );
       }
 
 }
 
-export default LoginPage
+export default SignUpPage

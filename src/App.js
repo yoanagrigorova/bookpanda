@@ -7,6 +7,7 @@ import LoginPage from './components/loginPage/loginPage';
 import RegisterPage from './components/registerPage/registerPage';
 import HomePage from './components/homePage/homePage';
 import ProfilePage from './components/profilePage/profilePage'
+import SignUpPage from './components/signUpPage/signUpPage';
 
 
 export default class App extends Component {
@@ -18,6 +19,7 @@ export default class App extends Component {
           <Route exact path="/register" component={RegisterPage} />
           <Route exact path="/" component={LoginPage} />
           <Route path="/homePage" component={HomePage} />
+          <Route path="/signUp" component={SignUpPage} />
           </Switch>
       </Router>
     );

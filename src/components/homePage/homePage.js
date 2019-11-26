@@ -4,6 +4,8 @@ import { Route } from 'react-router';
 
 import ProfilePage from '../profilePage/profilePage';
 import MenuIcon from '@material-ui/icons/Menu';
+import AllPage from '../allPage/allPage';
+import SubmitPage from '../submitPage/submitPage';
 
 
 import './homePage.css';
@@ -17,12 +19,9 @@ class homePage extends Component {
     }
     
     toggleMenu() {
-        console.log("hey")
         const toggleMenu = document.querySelector('.homePage .header .navigation .hamburgerButton');
         const menu = document.querySelector('.homePage .navigationPhone');
-
         const open = JSON.parse(toggleMenu.getAttribute('aria-expanded'));
-        console.log(open);
         toggleMenu.setAttribute('aria-expanded', !open);
         menu.hidden = !menu.hidden;
     }
@@ -35,7 +34,7 @@ class homePage extends Component {
                     <nav className="navigation">
                         <ul className="navigationList">
                             <li><Link to="/homePage/profilePage">My profile</Link></li>
-                            <li><Link to="/homePage/alPage">All</Link></li>
+                            <li><Link to="/homePage/allPage">All</Link></li>
                             <li><Link to="/homePage/feedPage">Feed</Link></li>
                         </ul>
                         <button
@@ -48,13 +47,16 @@ class homePage extends Component {
                 <nav className="navigationPhone">
                     <ul className="navigationListPhone">
                         <li><Link to="/homePage/profilePage">My profile</Link></li>
-                        <li><Link to="/homePage/alPage">All</Link></li>
+                        <li><Link to="/homePage/allPage">All</Link></li>
                         <li><Link to="/homePage/feedPage">Feed</Link></li>
                     </ul>
                     </nav>
                 <Router>
                     <Switch>
                         <Route path="/homePage/profilePage" component={ProfilePage} />
+                        <Route path="/homePage/allPage" component={AllPage} />
+                        <Route path="/homePage/profilePage" component={ProfilePage} />
+                        <Route path="/homePage/submitPage" component={SubmitPage} />
                     </Switch>
                 </Router>
        
