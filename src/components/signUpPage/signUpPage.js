@@ -5,8 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
-import {HashRouter as Router, Switch, Link} from 'react-router-dom';
-import { Route } from 'react-router';
+import {HashRouter as Link} from 'react-router-dom';
 
 
 class SignUpPage extends Component { 
