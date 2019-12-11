@@ -1,4 +1,4 @@
-package me.salisuwy;
+package com.piss.project;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
