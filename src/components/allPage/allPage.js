@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
+import Button from '@material-ui/core/Button';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
+import FaceIcon from '@material-ui/icons/Face';
 
 import PostCard from '../postCard/postCard';
 

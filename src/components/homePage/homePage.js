@@ -6,11 +6,9 @@ import ProfilePage from '../profilePage/profilePage';
 import MenuIcon from '@material-ui/icons/Menu';
 import AllPage from '../allPage/allPage';
 import SubmitPage from '../submitPage/submitPage';
-import SinglePost from '../singlePost/singlePost';
 
 
 import './homePage.css';
-import SignUpPage from '../submitPage/submitPage';
 
 class homePage extends Component {
 
