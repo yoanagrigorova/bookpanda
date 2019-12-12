@@ -9,10 +9,7 @@ import {HashRouter as Router, Switch, Link} from 'react-router-dom';
 import { Route } from 'react-router';
 
 import './loginPage.css'
-<<<<<<< HEAD
-=======
 import SingUpPage from '../signUpPage/signUpPage';
->>>>>>> f4b69eba62b3ed89e0699cd0ffea81ffa1825fcf
 
 class LoginPage extends Component { 
 
