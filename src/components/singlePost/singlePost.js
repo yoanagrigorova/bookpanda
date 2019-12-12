@@ -15,13 +15,13 @@ class SinglePost extends Component {
     render() {
         return (
             <div className="singlePost">
-                <div className="postTitle">
+                <div className="singlePostTitle">
                     {this.props.title}
                 </div>
-                <div className="postInfo">
+                <div className="singlePostInfo">
                     @{this.props.author} | {this.props.date}
                 </div>
-                <div className="postContent">
+                <div className="singlePostContent">
                     {this.props.content}
                 </div>
             </div>
