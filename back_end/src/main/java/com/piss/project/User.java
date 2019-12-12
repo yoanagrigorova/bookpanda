@@ -1,11 +1,18 @@
-package com.piss.project;
+package me.bookpanda;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
-
 import java.sql.Timestamp;
 
 @Entity
 public class User {
+//
+//    @Autowired
+//    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -56,9 +63,7 @@ public class User {
         this.password = password;
     }
 
-	/*
-	 * public String getCreated() { return created.toLocalDateTime(); }
-	 */	
+
     @Override
     public String toString() {
         return "User{" +

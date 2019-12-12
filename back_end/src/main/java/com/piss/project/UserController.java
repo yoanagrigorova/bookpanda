@@ -1,25 +1,22 @@
-package com.piss.project;
-
-import java.util.List;
-
-import javax.validation.Valid;
+package me.bookpanda;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping(value = "/user")
 public class UserController {
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     private UserRepository userRepository;
@@ -39,7 +36,8 @@ public class UserController {
         if (existingUser != null) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
-        
+
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
 
         return new ResponseEntity<>(user, HttpStatus.CREATED);
@@ -54,6 +52,10 @@ public class UserController {
         User currentUser = userRepository.findByUsername(user.getUsername());
         if (currentUser == null) {
             return new ResponseEntity("NO SUCH USER", HttpStatus.BAD_REQUEST);
+        }
+
+        if (!bCryptPasswordEncoder.matches(currentUser.getPassword(), user.getPassword())) {
+            return new ResponseEntity("WRONG PASSWORD", HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity(user, HttpStatus.OK);

@@ -1,4 +1,4 @@
-package com.piss.project;
+package me.bookpanda;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,33 +14,33 @@ import java.util.List;
 @RequestMapping(value = "/publication")
 public class PublicationController {
 
-	@Autowired
-	private PublicationRepository publicationRepository;
-	
-	@GetMapping
-	public ResponseEntity<Publication> getPublicationById(@RequestParam("id") int id) {
-		return new ResponseEntity(publicationRepository.findById(id), HttpStatus.OK);
-	}
-	
-	@GetMapping("/category")
-	public ResponseEntity<List<Publication>> getPublicationsByCategory(@RequestParam("category") String category) {
-		return new ResponseEntity(publicationRepository.findByCategory(category), HttpStatus.OK);
-	}
+    @Autowired
+    private PublicationRepository publicationRepository;
 
-	@GetMapping("/user")
-	public ResponseEntity<List<Publication>> getUserPublications(@RequestParam("userid") Long userId) {
-		return new ResponseEntity(publicationRepository.findByUserId(userId), HttpStatus.OK);
-	}
+    @GetMapping
+    public ResponseEntity<Publication> getPublicationById(@RequestParam("id") int id) {
+        return new ResponseEntity(publicationRepository.findById(id), HttpStatus.OK);
+    }
 
-	@PostMapping("/add")
-	public ResponseEntity<Publication> publishPost(@Valid @RequestBody Publication publication, BindingResult binding) {
-		if (binding.hasErrors()) {
-			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-		}
+    @GetMapping("/category")
+    public ResponseEntity<List<Publication>> getPublicationsByCategory(@RequestParam("category") String category) {
+        return new ResponseEntity(publicationRepository.findByCategory(category), HttpStatus.OK);
+    }
 
-		publicationRepository.save(publication);
+    @GetMapping("/user")
+    public ResponseEntity<List<Publication>> getUserPublications(@RequestParam("userid") Long userId) {
+        return new ResponseEntity(publicationRepository.findByUserId(userId), HttpStatus.OK);
+    }
 
-		return new ResponseEntity<>(publication, HttpStatus.CREATED);
-	}
+    @PostMapping("/add")
+    public ResponseEntity<Publication> publishPost(@Valid @RequestBody Publication publication, BindingResult binding) {
+        if (binding.hasErrors()) {
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        }
+
+        publicationRepository.save(publication);
+
+        return new ResponseEntity<>(publication, HttpStatus.CREATED);
+    }
 
 }
