@@ -33,5 +33,14 @@ CREATE TABLE `comment` (
   KEY `FK_COMMENT_PUBLICATION_idx` (`publicationId`),
   CONSTRAINT `FK_COMMENT_PUBLICATION` FOREIGN KEY (`publicationId`) REFERENCES `publication` (`id`),
   CONSTRAINT `FK_COMMENT_USER` FOREIGN KEY (`userId`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `users_subscribers` (
+  `user_id` int(11) NOT NULL,
+  `subscriber_id` int(11) NOT NULL,
+  PRIMARY KEY (`user_id`,`subscriber_id`),
+  KEY `subscriber_id` (`subscriber_id`),
+  CONSTRAINT `users_subscribers_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `users_subscribers_ibfk_2` FOREIGN KEY (`subscriber_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
