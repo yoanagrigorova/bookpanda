@@ -12,14 +12,13 @@ public class Comment {
     private Long userId;
     private String text;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "id")
     @Transient
     private Publication publication;
 
     private int publicationId;
 
-    @Transient
     private LocalDateTime created;
 
     public Comment() {

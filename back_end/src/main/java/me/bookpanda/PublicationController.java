@@ -19,17 +19,22 @@ public class PublicationController {
 
     @GetMapping
     public ResponseEntity<Publication> getPublicationById(@RequestParam("id") int id) {
-        return new ResponseEntity(publicationRepository.findById(id), HttpStatus.OK);
+        return new ResponseEntity<Publication>(publicationRepository.findById(id), HttpStatus.OK);
     }
 
     @GetMapping("/category")
     public ResponseEntity<List<Publication>> getPublicationsByCategory(@RequestParam("category") String category) {
-        return new ResponseEntity(publicationRepository.findByCategory(category), HttpStatus.OK);
+        return new ResponseEntity<List<Publication>>(publicationRepository.findByCategory(category), HttpStatus.OK);
     }
 
     @GetMapping("/user")
     public ResponseEntity<List<Publication>> getUserPublications(@RequestParam("userid") Long userId) {
-        return new ResponseEntity(publicationRepository.findByUserId(userId), HttpStatus.OK);
+        return new ResponseEntity<List<Publication>>(publicationRepository.findByUserId(userId), HttpStatus.OK);
+    }
+    
+    @GetMapping("/all")
+    public ResponseEntity<List<Publication>> getAllPublications() {
+        return new ResponseEntity<List<Publication>>(publicationRepository.findAll(),HttpStatus.OK);
     }
 
     @PostMapping("/add")
