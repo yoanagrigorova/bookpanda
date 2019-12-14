@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,6 +40,12 @@ public class UserController {
 	public ResponseEntity<List<User>> getUsers() {
 		return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
 	}
+	
+	@GetMapping
+	public ResponseEntity<User> getUserByUsername(@RequestParam("username") String username) {
+		return new ResponseEntity<>(userRepository.findByUsername(username), HttpStatus.OK);
+	}
+
 
 	@PostMapping("/registration")
 	public ResponseEntity<User> processRegisterUser(@Valid @RequestBody User user, BindingResult binding) {
@@ -55,23 +62,22 @@ public class UserController {
 		// BookPanda!");
 
 		user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
+		
+		User currentUser = userRepository.save(user);
 
-		userRepository.save(user);
-
-		User registeredUser = userRepository.findByUsername(user.getUsername());
-
-		return new ResponseEntity<>(registeredUser, HttpStatus.CREATED);
+		return new ResponseEntity<>(currentUser, HttpStatus.CREATED);
 	}
 
-	@PostMapping("/subscribe")
-	public void subscribeToUser(@RequestParam("userId") int userId, @RequestParam("subscriberId") int subscriberId) {
-		userRepository.subscribeToUser(userId, subscriberId);
-	}
-
-	@GetMapping("/all/subscribers")
-	public ResponseEntity<List<User>> getUserSubscribers(@RequestParam("userId") int userId) {
-		return new ResponseEntity(userRepository.getSubscribers(userId), HttpStatus.OK);
-	}
+	/*
+	 * @PostMapping("/subscribe") public void
+	 * subscribeToUser(@RequestParam("userId") int
+	 * userId, @RequestParam("subscriberId") int subscriberId) {
+	 * userRepository.subscribeToUser(userId, subscriberId); }
+	 * 
+	 * @GetMapping("/all/subscribers") public ResponseEntity<List<User>>
+	 * getUserSubscribers(@RequestParam("userId") int userId) { return new
+	 * ResponseEntity(userRepository.getSubscribers(userId), HttpStatus.OK); }
+	 */
 
 	@PostMapping("/login")
 	public ResponseEntity<User> processLoginUser(@Valid @RequestBody User user, BindingResult binding) {
@@ -80,15 +86,14 @@ public class UserController {
 		}
 
 		User currentUser = userRepository.findByUsername(user.getUsername());
-		
+
 		try {
 			if (currentUser == null || !BCrypt.checkpw(user.getPassword(), currentUser.getPassword())) {
 				return new ResponseEntity("WRONG USERNAME OR PASSWORD", HttpStatus.BAD_REQUEST);
 			}
-		}catch (IllegalArgumentException ex) {
+		} catch (IllegalArgumentException ex) {
 			return new ResponseEntity("WRONG USERNAME OR PASSWORD", HttpStatus.BAD_REQUEST);
 		}
-		
 
 		return new ResponseEntity(currentUser, HttpStatus.OK);
 	}

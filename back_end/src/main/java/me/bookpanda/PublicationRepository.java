@@ -1,16 +1,20 @@
 package me.bookpanda;
 
+import java.util.List;
+
+import javax.persistence.EntityManager;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface PublicationRepository extends JpaRepository<Publication, Long> {
 
-    List<Publication> findByUserId(Long userId);
 
-    Publication findById(int id);
+	List<Publication> findByUser_Id(Integer userId);
 
-    List<Publication> findByCategory(String category);
+	Publication findById(int id);
+
+	List<Publication> findByCategory(String category);
 }

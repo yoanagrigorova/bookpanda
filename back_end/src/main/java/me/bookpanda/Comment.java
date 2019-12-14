@@ -1,74 +1,78 @@
 package me.bookpanda;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+
+import java.sql.Timestamp;
 
 @Entity
-public class Comment {
+public class Comment implements Comparable<Comment>  {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private Long userId;
-    private String text;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "id")
-    @Transient
-    private Publication publication;
+	private Long userId;
 
-    private int publicationId;
+	private String text;
+	
+	private int publicationId;
 
-    private LocalDateTime created;
+	@Column(name = "created", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	private Timestamp created;
 
-    public Comment() {
-    }
+	public Comment() {
+	}
 
-    public Comment(Long userId, String text, Publication publication) {
-        this.userId = userId;
-        this.text = text;
-        this.publication = publication;
-        this.publicationId = publication.getId();
-    }
+	public Comment(Long userId, String text, int publicationId) {
+		this.userId = userId;
+		this.text = text;
+		this.publicationId = publicationId;
+	}
 
-    public void setPublicationId(int publicationId) {
-        this.publicationId = publicationId;
-    }
+	public void setPublicationId(int publicationId) {
+		this.publicationId = publicationId;
+	}
 
-    public int getPublicationId() {
-        return publicationId;
-    }
+	public int getPublicationId() {
+		return publicationId;
+	}
 
-    public int getId() {
-        return id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public Long getUserId() {
-        return userId;
-    }
+	public Long getUserId() {
+		return userId;
+	}
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
 
-    public String getText() {
-        return text;
-    }
+	public String getText() {
+		return text;
+	}
 
-    public void setText(String text) {
-        this.text = text;
-    }
+	public void setText(String text) {
+		this.text = text;
+	}
 
-    public Publication getPublication() {
-        return publication;
-    }
+	public Timestamp getCreated() {
+		return created;
+	}
 
-    public void setPublication(Publication publication) {
-        this.publication = publication;
-    }
+	public void setCreated(Timestamp created) {
+		this.created = created;
+	}
+	
+
+	@Override
+	public int compareTo(Comment o) {
+		return o.getCreated().compareTo(this.getCreated());
+	}
 
 }
