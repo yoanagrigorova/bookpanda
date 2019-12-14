@@ -1,11 +1,23 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
 import FaceIcon from '@material-ui/icons/Face';
-
-import PostCard from '../postCard/postCard';
-
 import './allPage.css';
+import PostCard from '../postCard/postCard';
+import { connect } from 'react-redux';
+
+import getAllPublications from '../../actions/getAllPublications';
+import fetchUsers from "../../actions/fetchUsers"
+
+const mapStateToProps = state => ({
+  ...state
+})
+
+const mapDispatchToProps = dispatch => ({
+  getAllPublications: () => dispatch(getAllPublications()),
+  getUsers: () => dispatch(fetchUsers())
+})
+
 
 class AllPage extends Component {
 
@@ -35,7 +47,7 @@ class AllPage extends Component {
           '&$disabled': {
             border: 'none',
           },
-        },    
+        },
       },
 
       MuiSvgIcon: {
@@ -51,104 +63,83 @@ class AllPage extends Component {
       },
     },
   });
-    
-    render() {
-          return(
-            <MuiThemeProvider theme={this.getMuiTheme()}>
-              <div className="allPage">
-                  <section className="allTitle">
-                    All Posts
+
+  constructor(props) {
+    super(props);
+    this.props.getAllPublications();
+    this.props.getUsers();
+    this.state = {
+      publications: [],
+      users:[]
+    }
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({
+        publications: this.props.publicationReducer.publications,
+        users: this.props.usersReducer.users
+      })
+    }, 500)
+  }
+
+  convertMonth = (month) =>{
+    switch(month){
+      case 0:
+        return "Jan"
+      case 1:
+        return "Feb"
+      case 2:
+        return "Mar"
+      case 3:
+        return "Apr"
+      case 4:
+        return "May"
+      case 5:
+        return "Jun"
+      case 6:
+        return "Jul"
+      case 7:
+        return "Aug"
+      case 8:
+        return "Sep"
+      case 9:
+        return "Oct"
+      case 10:
+        return "Nov"
+      case 11:
+        return "Dec"
+      default:
+        return ""
+    }
+  }
+
+  render() {
+    return (
+      <MuiThemeProvider theme={this.getMuiTheme()}>
+        <div className="allPage">
+          <section className="allTitle">
+            All Posts
                   </section>
-                  <section className="allPosts">
-                  <PostCard 
-                    title="Lorem ipsum dolor sit amet"
-                    author="author"
-                    sampleText="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
-                    date="Aug 10th 2019"
-                  />
-                                   <PostCard 
-                    title="Lorem ipsum dolor sit amet"
-                    author="author"
-                    sampleText="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
-                    date="Aug 10th 2019"
-                  />
-                                 <PostCard 
-                    title="Lorem ipsum dolor sit amet"
-                    author="author"
-                    sampleText="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
-                    date="Aug 10th 2019"
-                  />
-                                 <PostCard 
-                    title="Lorem ipsum dolor sit amet"
-                    author="author"
-                    sampleText="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
-                    date="Aug 10th 2019"
-                  />
-                                 <PostCard 
-                    title="Lorem ipsum dolor sit amet"
-                    author="author"
-                    sampleText="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
-                    date="Aug 10th 2019"
-                  />
-                                 <PostCard 
-                    title="Lorem ipsum dolor sit amet"
-                    author="author"
-                    sampleText="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
-                    date="Aug 10th 2019"
-                  />
-                   <PostCard 
-                    title="Lorem ipsum dolor sit amet"
-                    author="author"
-                    sampleText="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
-                    date="Aug 10th 2019"
-                  />
-                   <PostCard 
-                    title="Lorem ipsum dolor sit amet"
-                    author="author"
-                    sampleText="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
-                    date="Aug 10th 2019"
-                  />
-                   <PostCard 
-                    title="Lorem ipsum dolor sit amet"
-                    author="author"
-                    sampleText="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
-                    date="Aug 10th 2019"
-                  />
-                   <PostCard 
-                    title="Lorem ipsum dolor sit amet"
-                    author="author"
-                    sampleText="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
-                    date="Aug 10th 2019"
-                  />
-                   <PostCard 
-                    title="Lorem ipsum dolor sit amet"
-                    author="author"
-                    sampleText="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
-                    date="Aug 10th 2019"
-                  />
-                   <PostCard 
-                    title="Lorem ipsum dolor sit amet"
-                    author="author"
-                    sampleText="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
-                    date="Aug 10th 2019"
-                  />
-                   <PostCard 
-                    title="Lorem ipsum dolor sit amet"
-                    author="author"
-                    sampleText="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
-                    date="Aug 10th 2019"
-                  />
-                   <PostCard 
-                    title="Lorem ipsum dolor sit amet"
-                    author="author"
-                    sampleText="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
-                    date="Aug 10th 2019"
-                  />
-                  </section>
-              </div>
-            </MuiThemeProvider>
-          )
-      }
+          <section className="allPosts">
+            {
+              this.state.publications.map(publication => (
+                <PostCard
+                  id = {publication.id}
+                  title={publication.title}
+                  author={this.state.users.find(user => user.id === publication.userId).username}
+                  sampleText={publication.text}
+                  date={this.convertMonth(new Date(publication.created).getMonth())+ " " + new Date(publication.created).getDate()+ " " + new Date(publication.created).getFullYear()}
+                  key={publication.created}
+                />
+              ))
+            }
+
+          </section>
+        </div>
+      </MuiThemeProvider>
+    )
+  }
 }
 
-export default AllPage
+export default connect(mapStateToProps, mapDispatchToProps)(AllPage)
