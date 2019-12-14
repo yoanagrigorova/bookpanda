@@ -27,6 +27,9 @@ export const CREATE_PUBLICATION_ERROR= "CREATE_PUBLICATION_ERROR";
 export const GET_ALL_PUBLICATIONS_PENDING = "GET_ALL_PUBLICATIONS_PENDING";
 export const GET_ALL_PUBLICATIONS_SUCCESS = "GET_ALL_PUBLICATIONS_SUCCESS";
 export const GET_ALL_PUBLICATIONS_ERROR= "GET_ALL_PUBLICATIONS_ERROR";
+export const GET_PUBLICATION_PENDING = "CREATE_PUBLICATION_PENDING";
+export const GET_PUBLICATION_SUCCESS = "CREATE_PUBLICATION_SUCCESS";
+export const GET_PUBLICATION_ERROR= "CREATE_PUBLICATION_ERROR";
 
 export const loginPending = () => {
     return {
@@ -124,6 +127,26 @@ export const getAllPublicationsSuccess = (publications) => {
 export const getAllPublicationsError = (error) => {
     return {
         type: GET_ALL_PUBLICATIONS_ERROR,
+        error: error
+    }
+}
+
+export const getPublicationByIdPending = () => {
+    return {
+        type: GET_PUBLICATION_PENDING
+    }
+}
+
+export const getPublicationByIdSuccess = (publication) => {
+    return {
+        type: GET_PUBLICATION_SUCCESS,
+        publication: publication
+    }
+}
+
+export const getPublicationByIdError = (error) => {
+    return {
+        type: GET_PUBLICATION_ERROR,
         error: error
     }
 }

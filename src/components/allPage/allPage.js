@@ -125,6 +125,7 @@ class AllPage extends Component {
             {
               this.state.publications.map(publication => (
                 <PostCard
+                  id = {publication.id}
                   title={publication.title}
                   author={this.state.users.find(user => user.id === publication.userId).username}
                   sampleText={publication.text}
