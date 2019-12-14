@@ -6,9 +6,17 @@ import ProfilePage from '../profilePage/profilePage';
 import MenuIcon from '@material-ui/icons/Menu';
 import AllPage from '../allPage/allPage';
 import SubmitPage from '../submitPage/submitPage';
-
-
 import './homePage.css';
+
+import { connect } from 'react-redux';
+
+const mapStateToProps = state => ({
+  ...state
+})
+
+const mapDispatchToProps = dispatch => ({
+//   login: (data) => dispatch(login(data))
+ })
 
 class homePage extends Component {
 
@@ -26,6 +34,10 @@ class homePage extends Component {
         menu.hidden = !menu.hidden;
     }
 
+    signOut = () =>{
+        window.localStorage.removeItem("currentUser");
+    }
+
     render() {
           return(
             <div className="homePage">
@@ -36,6 +48,7 @@ class homePage extends Component {
                             <li><Link to="/homePage/profilePage">My profile</Link></li>
                             <li><Link to="/homePage/allPage">All</Link></li>
                             <li><Link to="/homePage/feedPage">Feed</Link></li>
+                            <li><Link to="/" onClick ={this.signOut}>Sign Out</Link></li>
                         </ul>
                         <button
                             className="hamburgerButton"
@@ -49,13 +62,14 @@ class homePage extends Component {
                         <li><Link to="/homePage/profilePage">My profile</Link></li>
                         <li><Link to="/homePage/allPage">All</Link></li>
                         <li><Link to="/homePage/feedPage">Feed</Link></li>
+                        <li><Link to="/" onClick ={this.signOut}>Sign Out</Link></li>
                     </ul>
                     </nav>
                 <Router>
                     <Switch>
                         <Route path="/homePage/profilePage" component={ProfilePage} />
                         <Route path="/homePage/allPage" component={AllPage} />
-                        <Route path="/homePage/profilePage" component={ProfilePage} />
+                        <Route path="/homePage/profilePage/:username" component={ProfilePage} />
                         <Route path="/homePage/submitPage" component={SubmitPage} />
                     </Switch>
                 </Router>
@@ -65,4 +79,4 @@ class homePage extends Component {
       }
 }
 
-export default homePage
+export default connect(mapStateToProps, mapDispatchToProps)(homePage)

@@ -8,6 +8,18 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
 import {HashRouter as Router, Switch, Link} from 'react-router-dom';
 import { Route } from 'react-router';
 
+import { connect } from 'react-redux';
+
+import createPublication from '../../actions/createPublication';
+
+const mapStateToProps = state => ({
+  ...state
+})
+
+const mapDispatchToProps = dispatch => ({
+  createPublication: (data) => dispatch(createPublication(data))
+ })
+
 class SignUpPage extends Component { 
 
   getMuiTheme = () => createMuiTheme({
@@ -140,9 +152,10 @@ class SignUpPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          email: '',
-          password: '',
+          title: '',
+          content: '',
           error: '',
+          currentUser : JSON.parse(window.localStorage.getItem("currentUser"))
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -154,6 +167,23 @@ class SignUpPage extends Component {
           [name]: event.target.value,
           error: ''
         });
+      }
+
+      add = (e) => {
+        e.preventDefault();
+        let data = {
+          title: this.state.title,
+          text : this.state.content,
+          category: "books",
+          userId: this.state.currentUser.id
+        }
+
+        this.props.createPublication(data);
+
+        let self = this;
+        setTimeout(()=>{
+          console.log(self.props)
+        }, 2000)
       }
 
       render() {
@@ -193,6 +223,7 @@ class SignUpPage extends Component {
                       type="submit"
                       color="primary"
                       variant="contained" 
+                      onClick={this.add}
                       //disabled={!this.state.username || !this.state.password}
                      >
                         Submit
@@ -215,4 +246,4 @@ class SignUpPage extends Component {
 
 }
 
-export default SignUpPage
+export default connect(mapStateToProps, mapDispatchToProps) (SignUpPage)
