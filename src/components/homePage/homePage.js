@@ -9,6 +9,8 @@ import SubmitPage from '../submitPage/submitPage';
 import './homePage.css';
 
 import { connect } from 'react-redux';
+import Badge from '@material-ui/core/Badge';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
 
 const mapStateToProps = state => ({
   ...state
@@ -25,6 +27,17 @@ class homePage extends Component {
 
         this.toggleMenu = this.toggleMenu.bind(this);
     }
+
+    getMuiTheme = () => createMuiTheme({
+        overrides: {
+            MuiBadge: {
+                colorPrimary: {
+                    backgroundColor: 'tomato',
+                }
+            }
+        }
+
+    });
     
     toggleMenu() {
         const toggleMenu = document.querySelector('.homePage .header .navigation .hamburgerButton');
@@ -40,16 +53,16 @@ class homePage extends Component {
 
     render() {
           return(
-            <div className="homePage">
-                <header className="header">
-                    <span className="logo"> BOOKPANDA</span>
-                    <nav className="navigation">
-                        <ul className="navigationList">
-                            <li><Link to="/homePage/profilePage">My profile</Link></li>
-                            <li><Link to="/homePage/allPage">All</Link></li>
-                            <li><Link to="/homePage/feedPage">Feed</Link></li>
-                            <li><Link to="/" onClick ={this.signOut}>Sign Out</Link></li>
-                        </ul>
+            <MuiThemeProvider theme={this.getMuiTheme()}>
+                <div className="homePage">
+                    <header className="header">
+                        <span className="logo"> BOOKPANDA</span>
+                        <nav className="navigation">
+                            <ul className="navigationList">
+                                <li><Badge badgeContent={4} color="primary"><Link to="/homePage/profilePage">My profile</Link></Badge></li>
+                                <li><Link to="/homePage/allPage">All</Link></li>
+                                <li><Link to="/homePage/feedPage">Feed</Link></li>
+                            </ul>
                         <button
                             className="hamburgerButton"
                             onClick={this.toggleMenu}
@@ -75,6 +88,7 @@ class homePage extends Component {
                 </Router>
        
             </div>
+</MuiThemeProvider>
           )
       }
 }

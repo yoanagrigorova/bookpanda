@@ -1,7 +1,8 @@
-package me.salisuwy;
+package com.piss.project;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+
+import java.sql.Timestamp;
 
 @Entity
 public class User {
@@ -12,7 +13,7 @@ public class User {
     private String username;
     private String email;
     private String password;
-    private LocalDateTime created;
+    private Timestamp created;
 
     public User() {
     }
@@ -21,7 +22,6 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.created = LocalDateTime.now();
     }
 
     public int getId() {
@@ -56,14 +56,9 @@ public class User {
         this.password = password;
     }
 
-    public LocalDateTime getCreated() {
-        return created;
-    }
-
-    public void setCreated() {
-        this.created = LocalDateTime.now();
-    }
-
+	/*
+	 * public String getCreated() { return created.toLocalDateTime(); }
+	 */	
     @Override
     public String toString() {
         return "User{" +
