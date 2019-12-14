@@ -1,17 +1,9 @@
-package com.piss.project;
+package me.bookpanda;
 
-import java.sql.Date;
+import javax.persistence.*;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Publication {
@@ -22,21 +14,22 @@ public class Publication {
 	private String text;
 	private String title;
 	private String category;
-
+	
+	@Column(name = "created", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Timestamp created;
 	
-    @OneToMany(mappedBy = "publicationId", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private List<Comment> comments;
-	
+	@OneToMany(mappedBy = "publicationId")
+	private List<Comment> comments;
+
 	public Publication() {
 	}
 
 	public Publication(Long userId, String title, String text, String category) {
-		this.userId = userId;
-		this.title = title;
-		this.text = text;
-		this.category = category;
-	}
+        this.userId = userId;
+        this.title = title;
+        this.text = text;
+        this.category = category;
+    }
 
 	public int getId() {
 		return id;
@@ -46,7 +39,6 @@ public class Publication {
 		this.id = id;
 	}
 
-	
 	public Long getUserId() {
 		return userId;
 	}
@@ -71,7 +63,6 @@ public class Publication {
 		this.title = title;
 	}
 
-
 	public String getCategory() {
 		return category;
 	}
@@ -79,17 +70,14 @@ public class Publication {
 	public void setCategory(String category) {
 		this.category = category;
 	}
-	
+
 	public String getCreated() {
 		return created.toString();
 	}
 
 	@Override
 	public String toString() {
-		return "Publication [id=" + id /* + ", userId=" + userId */+ ", text=" + text + ", title=" + title + ", created="
-				+ created + ", category=" + category + "]";
+		return "Publication [id=" + id /* + ", userId=" + userId */ + ", text=" + text + ", title=" + title
+				+ ", created=" + created + ", category=" + category + "]";
 	}
-
-	
-
 }
