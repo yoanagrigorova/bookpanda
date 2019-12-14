@@ -1,35 +1,42 @@
 package me.bookpanda;
 
-import javax.persistence.*;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
-public class Publication {
+public class Publication implements Comparable<Publication> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private Long userId;
+
 	private String text;
 	private String title;
 	private String category;
+
+	@OneToOne
+	@JoinColumn(name = "user_id")
+	private User user;
 	
-	@Column(name = "created", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@Column(name = "created", updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Timestamp created;
-	
-	@OneToMany(mappedBy = "publicationId")
-	private List<Comment> comments;
 
 	public Publication() {
 	}
 
-	public Publication(Long userId, String title, String text, String category) {
-        this.userId = userId;
-        this.title = title;
-        this.text = text;
-        this.category = category;
-    }
+	public Publication(User user, String title, String text, String category) {
+		this.user = user;
+		this.title = title;
+		this.text = text;
+		this.category = category;
+	}
 
 	public int getId() {
 		return id;
@@ -39,12 +46,12 @@ public class Publication {
 		this.id = id;
 	}
 
-	public Long getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getText() {
@@ -67,17 +74,22 @@ public class Publication {
 		return category;
 	}
 
-	public void setCategory(String category) {
-		this.category = category;
+	public Timestamp getCreated() {
+		return created;
 	}
 
-	public String getCreated() {
-		return created.toString();
+	public void setCreated(Timestamp created) {
+		this.created = created;
 	}
 
 	@Override
 	public String toString() {
-		return "Publication [id=" + id /* + ", userId=" + userId */ + ", text=" + text + ", title=" + title
-				+ ", created=" + created + ", category=" + category + "]";
+		return "Publication [id=" + id +  ", text=" + text + ", title=" + title + ", created="
+				+ created + ", category=" + category + "]";
+	}
+
+	@Override
+	public int compareTo(Publication o) {
+		return o.getCreated().compareTo(this.getCreated());
 	}
 }
