@@ -4,6 +4,7 @@ import getPublicationById from "../../actions/getPublicationById"
 import fetchUsers from "../../actions/fetchUsers"
 import './singlePost.css';
 import { connect } from 'react-redux';
+import {Link} from "react-router-dom";
 
 const mapStateToProps = state => ({
     ...state
@@ -17,7 +18,7 @@ class SinglePost extends Component {
 
     static propTypes = {
         title: PropTypes.string,
-        author: PropTypes.string,
+        // author: PropTypes.string,
         content: PropTypes.string,
         date: PropTypes.string
     };
@@ -35,7 +36,10 @@ class SinglePost extends Component {
         setTimeout(()=>{
             console.log(this.props)
             this.setState({
-                publication:this.props.publicationReducer.publication,
+                publication:{
+                    ...this.props.publicationReducer.publication,
+                    date:this.convertMonth(new Date(this.props.publicationReducer.publication.created).getMonth())+ " " + new Date(this.props.publicationReducer.publication.created).getDate()+ " " + new Date(this.props.publicationReducer.publication.created).getFullYear()
+                },
             })
         }, 500)
     }
@@ -78,7 +82,7 @@ class SinglePost extends Component {
                     {this.state.publication ? this.state.publication.title : ""}
                 </div>
                 <div className="singlePostInfo">
-                    @{this.state.publication ? this.state.publication.author : ""} | {this.state.publication ? this.convertMonth(new Date(this.state.publication.created).getMonth())+ " " + new Date(this.state.publication.created).getDate()+ " " + new Date(this.state.publication.created).getFullYear() : ""}
+                   <Link to={this.state.publication? "/homePage/profilePage/" + this.state.publication.user.username : ""}> @{this.state.publication ? this.state.publication.user.username : ""}</Link> | {this.state.publication ? this.state.publication.date : ""}
                 </div>
                 <div className="singlePostContent">
                     {this.state.publication ? this.state.publication.text: ""}

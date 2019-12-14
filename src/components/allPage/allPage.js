@@ -7,7 +7,6 @@ import PostCard from '../postCard/postCard';
 import { connect } from 'react-redux';
 
 import getAllPublications from '../../actions/getAllPublications';
-import fetchUsers from "../../actions/fetchUsers"
 
 const mapStateToProps = state => ({
   ...state
@@ -15,7 +14,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getAllPublications: () => dispatch(getAllPublications()),
-  getUsers: () => dispatch(fetchUsers())
 })
 
 
@@ -67,10 +65,8 @@ class AllPage extends Component {
   constructor(props) {
     super(props);
     this.props.getAllPublications();
-    this.props.getUsers();
     this.state = {
       publications: [],
-      users:[]
     }
   }
 
@@ -78,9 +74,8 @@ class AllPage extends Component {
     setTimeout(() => {
       this.setState({
         publications: this.props.publicationReducer.publications,
-        users: this.props.usersReducer.users
       })
-    }, 500)
+    }, 600)
   }
 
   convertMonth = (month) =>{
@@ -127,7 +122,7 @@ class AllPage extends Component {
                 <PostCard
                   id = {publication.id}
                   title={publication.title}
-                  author={this.state.users.find(user => user.id === publication.userId).username}
+                  author={publication.user}
                   sampleText={publication.text}
                   date={this.convertMonth(new Date(publication.created).getMonth())+ " " + new Date(publication.created).getDate()+ " " + new Date(publication.created).getFullYear()}
                   key={publication.created}
