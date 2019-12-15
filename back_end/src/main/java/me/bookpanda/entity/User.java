@@ -1,4 +1,4 @@
-package me.bookpanda;
+package me.bookpanda.entity;
 
 import java.sql.Timestamp;
 import javax.persistence.Column;

@@ -1,4 +1,4 @@
-package me.bookpanda;
+package me.bookpanda.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

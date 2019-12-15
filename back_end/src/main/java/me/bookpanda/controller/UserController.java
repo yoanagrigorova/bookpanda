@@ -1,9 +1,12 @@
-package me.bookpanda;
+package me.bookpanda.controller;
 
 import java.util.List;
 
 import javax.validation.Valid;
 
+import me.bookpanda.entity.User;
+import me.bookpanda.repository.UserRepository;
+import me.bookpanda.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

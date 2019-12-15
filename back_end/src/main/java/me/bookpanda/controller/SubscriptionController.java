@@ -1,4 +1,4 @@
-package me.bookpanda;
+package me.bookpanda.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,6 +6,10 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import me.bookpanda.entity.Publication;
+import me.bookpanda.entity.Subscription;
+import me.bookpanda.repository.PublicationRepository;
+import me.bookpanda.repository.SubscriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

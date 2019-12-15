@@ -1,14 +1,11 @@
-package me.bookpanda;
+package me.bookpanda.repository;
 
-import java.util.Collections;
 import java.util.List;
 
+import me.bookpanda.entity.Subscription;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Repository
 public interface SubscriptionRepository extends JpaRepository<Subscription, Long> {

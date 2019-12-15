@@ -1,7 +1,8 @@
-package me.bookpanda;
+package me.bookpanda.repository;
 
 import javax.persistence.EntityManager;
 
+import me.bookpanda.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

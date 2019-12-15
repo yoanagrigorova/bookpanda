@@ -1,4 +1,4 @@
-package me.bookpanda;
+package me.bookpanda.service;
 
 import java.util.Properties;
 import javax.mail.Message;
