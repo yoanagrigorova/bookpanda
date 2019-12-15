@@ -17,7 +17,7 @@ const mapDispatchToProps = dispatch => ({
   createPublication: (data) => dispatch(createPublication(data))
  })
 
-class SignUpPage extends Component { 
+class SubmitPage extends Component { 
 
   getMuiTheme = () => createMuiTheme({
     typography: {
@@ -243,4 +243,4 @@ class SignUpPage extends Component {
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps) (SignUpPage)
+export default connect(mapStateToProps, mapDispatchToProps) (SubmitPage)
