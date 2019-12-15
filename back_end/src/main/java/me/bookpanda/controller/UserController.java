@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,16 +35,18 @@ public class UserController {
 	@Autowired
 	private UserRepository userRepository;
 
+	@Autowired
+	private EmailService emailService;
+
 	@GetMapping("/all")
 	public ResponseEntity<List<User>> getUsers() {
 		return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
 	}
-	
+
 	@GetMapping
 	public ResponseEntity<User> getUserByUsername(@RequestParam("username") String username) {
 		return new ResponseEntity<>(userRepository.findByUsername(username), HttpStatus.OK);
 	}
-
 
 	@PostMapping("/registration")
 	public ResponseEntity<User> processRegisterUser(@Valid @RequestBody User user, BindingResult binding) {
@@ -57,13 +58,12 @@ public class UserController {
 		if (existingUser != null) {
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		}
-//
-		// mailService.sendEmail(user.getEmail(), "Successful registration to
-		// BookPanda!");
 
 		user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
-		
+
 		User currentUser = userRepository.save(user);
+		
+		emailService.sendEmail(user.getEmail(), "Successful registration to Bookpanda!");
 
 		return new ResponseEntity<>(currentUser, HttpStatus.CREATED);
 	}
