@@ -14,13 +14,14 @@ class PostCard extends Component {
     };
 
     render() {
+        console.log(this.props)
         return (
             <Link to={{
                 pathname: "/homePage/singlePost/" + this.props.id,
                 publication:{
                     id:this.props.id,
                 title:this.props.title,
-                author: this.props.author,
+                user: this.props.author,
                 text: this.props.sampleText,
                 date:this.props.date
                 }
@@ -29,8 +30,8 @@ class PostCard extends Component {
                 <div className="postTitle">
                     {this.props.title}
                 </div>
-                <Link to={"/homePage/profilePage/"+this.props.author.toLowerCase()} className="postAuthor" replace>
-                    @{this.props.author}
+                <Link to={"/homePage/profilePage/"+this.props.author.username.toLowerCase()} className="postAuthor" replace>
+                    @{this.props.author.username}
                 </Link>
                 <div className="postSampleText">
                     {this.props.sampleText}
