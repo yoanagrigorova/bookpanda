@@ -34,6 +34,14 @@ export const GET_SUBSCRIBERS_PENDING = "GET_SUBSCRIBERS_PENDING";
 export const GET_SUBSCRIBERS_SUCCESS = "GET_SUBSCRIBERS_SUCCESS";
 export const GET_SUBSCRIBERS_ERROR = "GET_SUBSCRIBERS_ERROR";
 
+export const ADD_COMMENT_PENDING = "ADD_COMMENT_PENDING";
+export const ADD_COMMENT_SUCCESS = "ADD_COMMENT_SUCCESS";
+export const ADD_COMMENT_ERROR = "ADD_COMMENT_ERROR";
+
+export const GET_COMMENTS_PENDING = "GET_COMMENTS_PENDING";
+export const GET_COMMENTS_SUCCESS = "GET_COMMENTS_SUCCESS";
+export const GET_COMMENTS_ERROR = "GET_COMMENTS_ERROR";
+
 export const loginPending = () => {
     return {
         type: LOGIN_PENDING
@@ -250,6 +258,46 @@ export const getSubscribersSuccess = (subscribers) => {
 export const getSubscribersError = (error) => {
     return {
         type: GET_SUBSCRIBERS_ERROR,
+        error: error
+    }
+}
+
+export const addCommentPending = () => {
+    return {
+        type: ADD_COMMENT_PENDING
+    }
+}
+
+export const addCommentSuccess = (comment) => {
+    return {
+        type: ADD_COMMENT_SUCCESS,
+        comment: comment
+    }
+}
+
+export const addCommentError = (error) => {
+    return {
+        type: ADD_COMMENT_ERROR,
+        error: error
+    }
+}
+
+export const getCommentsPending = () => {
+    return {
+        type: GET_COMMENTS_PENDING
+    }
+}
+
+export const getCommentsSuccess = (comments) => {
+    return {
+        type: GET_COMMENTS_SUCCESS,
+        comments: comments
+    }
+}
+
+export const getCommentsError = (error) => {
+    return {
+        type: GET_COMMENTS_ERROR,
         error: error
     }
 }

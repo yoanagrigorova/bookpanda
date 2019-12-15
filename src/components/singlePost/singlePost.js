@@ -7,13 +7,17 @@ import { connect } from 'react-redux';
 import {Link} from "react-router-dom";
 import CommentCard from '../commentCard/commentCard';
 import CommentInput from '../commentCard/commentInput';
+import addComment from '../../actions/addComment';
+import getComments from '../../actions/getComments'
 
 const mapStateToProps = state => ({
     ...state
   })
   const mapDispatchToProps = dispatch => ({
     getPublicationById: (id) => dispatch(getPublicationById(id)),
-    getUsers: ()=> dispatch(fetchUsers())
+    getUsers: ()=> dispatch(fetchUsers()),
+    addComment: (data) => dispatch(addComment(data)),
+    getComments: (id) => dispatch(getComments(id))
   })
 
 class SinglePost extends Component {
@@ -28,9 +32,12 @@ class SinglePost extends Component {
     constructor(props){
         super(props);
         this.props.getPublicationById(this.props.location.pathname.split('/')[3]);
-        // this.props.getUsers()
+        this.props.getComments(this.props.location.pathname.split('/')[3])
         this.state = {
             publication: this.props.location.publication? this.props.location.publication : null,
+            currentUser: JSON.parse(window.localStorage.getItem("currentUser")),
+            comments: [],
+            users: JSON.parse(window.localStorage.getItem("users"))
         }
     }
 
@@ -41,8 +48,19 @@ class SinglePost extends Component {
                     ...this.props.publicationReducer.publication,
                     date:this.convertMonth(new Date(this.props.publicationReducer.publication.created).getMonth())+ " " + new Date(this.props.publicationReducer.publication.created).getDate()+ " " + new Date(this.props.publicationReducer.publication.created).getFullYear()
                 },
+                comments: this.props.publicationReducer.comments? this.props.publicationReducer.comments.reverse() : this.props.publicationReducer.comments,
+                  
             })
-        }, 500)
+        }, 600)
+    }
+
+    update = () => {
+      this.props.getComments(this.props.location.pathname.split('/')[3])
+      setTimeout(()=>{
+        this.setState({
+          comments: this.props.publicationReducer.comments? this.props.publicationReducer.comments.reverse() : this.props.publicationReducer.comments,
+        })
+    }, 500)
     }
 
     convertMonth = (month) =>{
@@ -91,8 +109,13 @@ class SinglePost extends Component {
                     {this.state.publication ? this.state.publication.text: ""}
                 </div>
             </div>
-            <CommentInput author={avi} ></CommentInput>
-            <CommentCard  author={avi} sampleText =" sflkjsflkjafjaflkakfljasfklajf" date="14.07.2019"></CommentCard>
+            <CommentInput author={this.state.currentUser} update={this.update} ></CommentInput>
+            {
+              this.state.comments && this.state.comments.map(comment => (
+                <CommentCard  author={this.state.users.find(user => user.id === comment.userId)} sampleText ={comment.text} date={this.convertMonth(new Date(comment.created).getMonth())+ " " + new Date(comment.created).getDate()+ " " + new Date(comment.created).getFullYear()} key={comment.created}></CommentCard>
+              ))
+            }
+            
           </div>
         )
     }

@@ -99,6 +99,7 @@ class profilePage extends Component {
     let self = this;
 
     setTimeout(() => {
+      window.localStorage.setItem("users", JSON.stringify(this.props.usersReducer.users))
       if (self.props.location.pathname.split("/")[3]) {
         let user = this.props.usersReducer.users.find(user => user.username === self.props.location.pathname.split("/")[3]);
         console.log(this.props)
@@ -115,7 +116,7 @@ class profilePage extends Component {
   }
 
   componentWillUpdate() {
-    if (this.state.mounted && this.props.location.pathname.split("/")[3] !== this.state.user.username) {
+    if (this.state.mounted && this.state.user && this.props.location.pathname.split("/")[3] !== this.state.user.username) {
       let user = this.props.usersReducer.users.find(user => user.username === this.props.location.pathname.split("/")[3]);
       this.setState({
         user: user,
@@ -179,7 +180,7 @@ class profilePage extends Component {
             </div>
             <div className="submitPostButton">
               {
-                this.state.user.username === this.state.currentUser.username ?
+                this.state.user && this.state.user.username === this.state.currentUser.username ?
                   <Button variant="outlined" color="primary">
                     <Link to="/homePage/submitPage">Submit a post</Link>
                   </Button>

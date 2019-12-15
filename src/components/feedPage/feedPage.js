@@ -71,7 +71,7 @@ class FeedPage extends Component {
   componentDidMount() {
     setTimeout(() => {
       this.setState({
-        publications: this.props.subscribtionReducer.feed.reverse(),
+        publications: this.props.subscribtionReducer.feed,
       })
     }, 600)
   }
@@ -116,7 +116,7 @@ class FeedPage extends Component {
                   </section>
           <section className="allPosts">
             {
-              this.state.publications.map(publication => (
+                this.state.publications && this.state.publications.reverse().map(publication => (
                 <PostCard
                   id = {publication.id}
                   title={publication.title}
