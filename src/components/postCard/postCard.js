@@ -8,13 +8,12 @@ class PostCard extends Component {
     static propTypes = {
         id: PropTypes.number,
         title: PropTypes.string,
-        author: PropTypes.string,
+        author: PropTypes.object,
         sampleText: PropTypes.string,
         date: PropTypes.string,
     };
 
     render() {
-        console.log(this.props)
         return (
             <Link to={{
                 pathname: "/homePage/singlePost/" + this.props.id,

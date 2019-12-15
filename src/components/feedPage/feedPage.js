@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
-import './allPage.css';
+import './feedPage.css';
 import PostCard from '../postCard/postCard';
 import { connect } from 'react-redux';
 
-import getAllPublications from '../../actions/getAllPublications';
+import getFeed from '../../actions/getFeed';
 
 const mapStateToProps = state => ({
   ...state
 })
 
 const mapDispatchToProps = dispatch => ({
-  getAllPublications: () => dispatch(getAllPublications()),
+    getFeed: (id) => dispatch(getFeed(id)),
 })
 
 
-class AllPage extends Component {
+class FeedPage extends Component {
 
   getMuiTheme = () => createMuiTheme({
     typography: {
@@ -62,7 +62,7 @@ class AllPage extends Component {
 
   constructor(props) {
     super(props);
-    this.props.getAllPublications();
+    this.props.getFeed(JSON.parse(window.localStorage.getItem("currentUser")).id);
     this.state = {
       publications: [],
     }
@@ -71,7 +71,7 @@ class AllPage extends Component {
   componentDidMount() {
     setTimeout(() => {
       this.setState({
-        publications: this.props.publicationReducer.publications.reverse(),
+        publications: this.props.subscribtionReducer.feed.reverse(),
       })
     }, 600)
   }
@@ -112,7 +112,7 @@ class AllPage extends Component {
       <MuiThemeProvider theme={this.getMuiTheme()}>
         <div className="allPage">
           <section className="allTitle">
-            All Posts
+            Feed
                   </section>
           <section className="allPosts">
             {
@@ -135,4 +135,4 @@ class AllPage extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AllPage)
+export default connect(mapStateToProps, mapDispatchToProps)(FeedPage)

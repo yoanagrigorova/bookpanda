@@ -1,17 +1,3 @@
-// export const action = () => dispatch =>{
-//     dispatch({
-//         type: 'ACTION',
-//         payload: "hello"
-//     })
-// }
-
-// export const simpleAction = () => dispatch => {
-//     dispatch({
-//         type: 'SIMPLE_ACTION',
-//         payload: "hello bitches"
-//     })
-// }
-
 export const FETCH_USERS_PENDING = 'FETCH_USERS_PENDING';
 export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
 export const FETCH_USERS_ERROR = 'FETCH_USERS_ERROR';
@@ -30,6 +16,23 @@ export const GET_ALL_PUBLICATIONS_ERROR= "GET_ALL_PUBLICATIONS_ERROR";
 export const GET_PUBLICATION_PENDING = "CREATE_PUBLICATION_PENDING";
 export const GET_PUBLICATION_SUCCESS = "CREATE_PUBLICATION_SUCCESS";
 export const GET_PUBLICATION_ERROR= "CREATE_PUBLICATION_ERROR";
+export const GET_USER_PUBLICATIONS_PENDING = "GET_USER_PUBLICATIONS_PENDING";
+export const GET_USER_PUBLICATIONS_SUCCESS = "GET_USER_PUBLICATIONS_SUCCESS";
+export const GET_USER_PUBLICATIONS_ERROR = "GET_USER_PUBLICATIONS_ERROR";
+export const SUBSCRIBE_PENDING = "SUBSCRIBE_PENDING";
+export const SUBSCRIBE_SUCCESS = "SUBSCRIBE_SUCCESS";
+export const SUBSCRIBE_ERROR = "SUBSCRIBE_ERROR";
+export const GET_FEED_PENDING = "GET_FEED_PENDING";
+export const GET_FEED_SUCCESS = "GET_FEED_SUCCESS";
+export const GET_FEED_ERROR= "GET_FEED_ERROR";
+
+export const GET_SUBSCRIPTIONS_PENDING = "GET_SUBSCRIPTIONS_PENDING";
+export const GET_SUBSCRIPTIONS_SUCCESS = "GET_SUBSCRIPTIONS_SUCCESS";
+export const GET_SUBSCRIPTIONS_ERROR= "GET_SUBSCRIPTIONS_ERROR";
+
+export const GET_SUBSCRIBERS_PENDING = "GET_SUBSCRIBERS_PENDING";
+export const GET_SUBSCRIBERS_SUCCESS = "GET_SUBSCRIBERS_SUCCESS";
+export const GET_SUBSCRIBERS_ERROR = "GET_SUBSCRIBERS_ERROR";
 
 export const loginPending = () => {
     return {
@@ -147,6 +150,106 @@ export const getPublicationByIdSuccess = (publication) => {
 export const getPublicationByIdError = (error) => {
     return {
         type: GET_PUBLICATION_ERROR,
+        error: error
+    }
+}
+
+export const getUserPublicationsPending = () => {
+    return {
+        type: GET_USER_PUBLICATIONS_PENDING
+    }
+}
+
+export const getUserPublicationsSuccess = (publications) => {
+    return {
+        type: GET_USER_PUBLICATIONS_SUCCESS,
+        publications: publications
+    }
+}
+
+export const getUserPublicationsError = (error) => {
+    return {
+        type: GET_USER_PUBLICATIONS_ERROR,
+        error: error
+    }
+}
+
+export const subscribePending = () => {
+    return {
+        type: SUBSCRIBE_PENDING
+    }
+}
+
+export const subscribeSuccess = (subscription) => {
+    return {
+        type: SUBSCRIBE_SUCCESS,
+        subscription: subscription
+    }
+}
+
+export const subscribeError = (error) => {
+    return {
+        type: SUBSCRIBE_ERROR,
+        error: error
+    }
+}
+
+export const getFeedPending = () => {
+    return {
+        type: GET_FEED_PENDING
+    }
+}
+
+export const getFeedSuccess = (feed) => {
+    return {
+        type: GET_FEED_SUCCESS,
+        feed: feed
+    }
+}
+
+export const getFeedError = (error) => {
+    return {
+        type: GET_FEED_ERROR,
+        error: error
+    }
+}
+
+export const getSubscriptionsPending = () => {
+    return {
+        type: GET_SUBSCRIPTIONS_PENDING
+    }
+}
+
+export const getSubscriptionsSuccess = (subscriptions) => {
+    return {
+        type: GET_SUBSCRIPTIONS_SUCCESS,
+        subscriptions: subscriptions
+    }
+}
+
+export const getSubscriptionsError = (error) => {
+    return {
+        type: GET_SUBSCRIPTIONS_ERROR,
+        error: error
+    }
+}
+
+export const getSubscribersPending = () => {
+    return {
+        type: GET_SUBSCRIBERS_PENDING
+    }
+}
+
+export const getSubscribersSuccess = (subscribers) => {
+    return {
+        type: GET_SUBSCRIBERS_SUCCESS,
+        subscribers: subscribers
+    }
+}
+
+export const getSubscribersError = (error) => {
+    return {
+        type: GET_SUBSCRIBERS_ERROR,
         error: error
     }
 }

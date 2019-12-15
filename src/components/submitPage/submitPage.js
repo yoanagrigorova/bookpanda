@@ -1,12 +1,9 @@
 import React, {Component} from 'react';
 
 import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
-import {HashRouter as Router, Switch, Link} from 'react-router-dom';
-import { Route } from 'react-router';
 
 import { connect } from 'react-redux';
 
@@ -175,18 +172,18 @@ class SignUpPage extends Component {
           title: this.state.title,
           text : this.state.content,
           category: "books",
-          userId: this.state.currentUser.id
+          user: {id:this.state.currentUser.id}
         }
 
         this.props.createPublication(data);
-
-        let self = this;
         setTimeout(()=>{
-          console.log(self.props)
-        }, 2000)
+          console.log(this.props)
+          this.props.history.push("/homePage/singlePost/" + this.props.publicationReducer.publication.id)
+        }, 500)
       }
 
       render() {
+         
           return ( 
               <div className="loginContainer">
                 <MuiThemeProvider theme={this.getMuiTheme()}>

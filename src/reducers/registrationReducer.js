@@ -15,7 +15,6 @@ export function registrationReducer(state = initialState, action) {
                 pending: true
             }
         case REGISTRATION_SUCCESS:
-            console.log(action.user)
             return {
                 ...state,
                 pending: false,

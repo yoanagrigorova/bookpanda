@@ -5,10 +5,8 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
-import { HashRouter as Router, Switch, Link } from 'react-router-dom';
-import { Route } from 'react-router';
+import { Link } from 'react-router-dom';
 import './loginPage.css'
-import SingUpPage from '../signUpPage/signUpPage';
 import { connect } from 'react-redux';
 
 import login from '../../actions/login';
@@ -169,7 +167,6 @@ class LoginPage extends Component {
 
     let self = this;
     setTimeout(()=>{
-      console.log(self.props.usersReducer.user)
       if(self.props.usersReducer.user){
         let currUser = {
           id: self.props.usersReducer.user.id,
@@ -177,7 +174,7 @@ class LoginPage extends Component {
           email: self.props.usersReducer.user.email
         }
         window.localStorage.setItem("currentUser", JSON.stringify(currUser));
-        self.props.history.push('/homePage/profilePage', self.props.usersReducer.user)
+        self.props.history.push('/homePage/profilePage/' + this.props.usersReducer.user.username, self.props.usersReducer.user)
       }
     }, 500)
   }

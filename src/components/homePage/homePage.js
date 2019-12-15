@@ -7,6 +7,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import AllPage from '../allPage/allPage';
 import SubmitPage from '../submitPage/submitPage';
 import SinglePost from "../singlePost/singlePost"
+import FeedPage from "../feedPage/feedPage"
+
 import './homePage.css';
 
 import { connect } from 'react-redux';
@@ -60,7 +62,7 @@ class homePage extends Component {
                         <span className="logo"> BOOKPANDA</span>
                         <nav className="navigation">
                             <ul className="navigationList">
-                                <li><Badge badgeContent={4} color="primary"><Link to="/homePage/profilePage">My profile</Link></Badge></li>
+                                <li><Link to={"/homePage/profilePage/"+JSON.parse(window.localStorage.getItem("currentUser")).username}>My profile</Link></li>
                                 <li><Link to="/homePage/allPage">All</Link></li>
                                 <li><Link to="/homePage/feedPage">Feed</Link></li>
                                 <li><Link to="/" onClick={this.signOut}>Sign Out</Link></li>
@@ -74,7 +76,7 @@ class homePage extends Component {
                     </header>
                     <nav className="navigationPhone">
                         <ul className="navigationListPhone">
-                            <li><Link to="/homePage/profilePage">My profile</Link></li>
+                            <li><Link to={"/homePage/profilePage/"+JSON.parse(window.localStorage.getItem("currentUser")).username}>My profile</Link></li>
                             <li><Link to="/homePage/allPage">All</Link></li>
                             <li><Link to="/homePage/feedPage">Feed</Link></li>
                             <li><Link to="/" onClick={this.signOut}>Sign Out</Link></li>
@@ -87,6 +89,7 @@ class homePage extends Component {
                             <Route path="/homePage/profilePage/:username" component={ProfilePage} />
                             <Route path="/homePage/submitPage" component={SubmitPage} />
                             <Route path="/homePage/singlePost/:id" component={SinglePost} />
+                            <Route path="/homePage/feedPage" component={FeedPage} />
                         </Switch>
                     </Router>
 

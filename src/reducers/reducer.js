@@ -31,7 +31,6 @@ export function usersReducer(state = initialState, action) {
                 pending: true
             }
         case FETCH_USERS_SUCCESS:
-            console.log(action.users)
             return {
                 ...state,
                 pending: false,
@@ -83,7 +82,6 @@ export function usersReducer(state = initialState, action) {
 }
 
 export const getUsers = state => {
-    console.log(state.users)
     return state.users;
 };
 export const getCurrentUser = state => initialState.user;

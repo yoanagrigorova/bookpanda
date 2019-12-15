@@ -16,12 +16,10 @@ function login(data) {
                 if (res.error) {
                     throw (res.error);
                 }
-                console.log(res)
                 dispatch(loginSuccess(res));
                 return res;
             })
             .catch(error => {
-                console.log(error)
                 dispatch(loginError(error));
             })
     }

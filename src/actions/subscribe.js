@@ -1,9 +1,9 @@
-import { createPublicationPending, createPublicationSuccess, createPublicationError } from './action';
+import { subscribePending, subscribeSuccess, subscribeError } from './action';
 
-function createPublication(data) {
+function subscribe(data) {
     return dispatch => {
-        dispatch(createPublicationPending());
-        fetch('http://localhost:8080/publication/add', {
+        dispatch(subscribePending());
+        fetch('http://localhost:8080/subscription/add', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -16,13 +16,13 @@ function createPublication(data) {
                 if (res.error) {
                     throw (res.error);
                 }
-                dispatch(createPublicationSuccess(res));
+                dispatch(subscribeSuccess(res));
                 return res;
             })
             .catch(error => {
-                dispatch(createPublicationError(error));
+                dispatch(subscribeError(error));
             })
     }
 }
 
-export default createPublication;
+export default subscribe;

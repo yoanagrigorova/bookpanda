@@ -16,12 +16,10 @@ function registration(data) {
                 if (res.error) {
                     throw (res.error);
                 }
-                console.log(res)
                 dispatch(registrationSuccess(res));
                 return res;
             })
             .catch(error => {
-                console.log(error)
                 dispatch(registrationError(error));
             })
     }

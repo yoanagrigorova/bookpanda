@@ -1,81 +1,84 @@
 import {
-    CREATE_PUBLICATION_PENDING, CREATE_PUBLICATION_SUCCESS, CREATE_PUBLICATION_ERROR,
-    GET_ALL_PUBLICATIONS_PENDING, GET_ALL_PUBLICATIONS_SUCCESS, GET_ALL_PUBLICATIONS_ERROR,
-    GET_PUBLICATION_PENDING, GET_PUBLICATION_SUCCESS, GET_PUBLICATION_ERROR,
-    GET_USER_PUBLICATIONS_PENDING, GET_USER_PUBLICATIONS_SUCCESS, GET_USER_PUBLICATIONS_ERROR,
+    SUBSCRIBE_PENDING, SUBSCRIBE_SUCCESS, SUBSCRIBE_ERROR,
+    GET_FEED_PENDING, GET_FEED_SUCCESS, GET_FEED_ERROR,
+    GET_SUBSCRIPTIONS_PENDING, GET_SUBSCRIPTIONS_SUCCESS, GET_SUBSCRIPTIONS_ERROR,
+    GET_SUBSCRIBERS_PENDING, GET_SUBSCRIBERS_SUCCESS, GET_SUBSCRIBERS_ERROR
 } from '../actions/action';
 
 const initialState = {
     pending: false,
-    publication: null,
-    error: null
+    users: [],
+    error: null,
+    user: null,
+    feed: null,
+    subsctiptions: null
 }
 
-export function publicationReducer(state = initialState, action) {
+export function subscribtionReducer(state = initialState, action) {
     switch (action.type) {
-        case CREATE_PUBLICATION_PENDING:
+        case SUBSCRIBE_PENDING:
             return {
                 ...state,
                 pending: true
             }
-        case CREATE_PUBLICATION_SUCCESS:
+        case SUBSCRIBE_SUCCESS:
             return {
                 ...state,
                 pending: false,
-                publication: action.publication
+                subscription: action.subscription
             }
-        case CREATE_PUBLICATION_ERROR:
+        case SUBSCRIBE_ERROR:
             return {
                 ...state,
                 pending: false,
                 error: action.error
             }
-        case GET_ALL_PUBLICATIONS_PENDING:
+        case GET_FEED_PENDING:
             return {
                 ...state,
                 pending: true
             }
-        case GET_ALL_PUBLICATIONS_SUCCESS:
+        case GET_FEED_SUCCESS:
             return {
                 ...state,
                 pending: false,
-                publications: action.publications
+                feed: action.feed
             }
-        case GET_ALL_PUBLICATIONS_ERROR:
+        case GET_FEED_ERROR:
             return {
                 ...state,
                 pending: false,
                 error: action.error
             }
-        case GET_PUBLICATION_PENDING:
+        case GET_SUBSCRIPTIONS_PENDING:
             return {
                 ...state,
                 pending: true
             }
-        case GET_PUBLICATION_SUCCESS:
+        case GET_SUBSCRIPTIONS_SUCCESS:
             return {
                 ...state,
                 pending: false,
-                publication: action.publication
+                subscriptions: action.subscriptions
             }
-        case GET_PUBLICATION_ERROR:
+        case GET_SUBSCRIPTIONS_ERROR:
             return {
                 ...state,
                 pending: false,
                 error: action.error
             }
-        case GET_USER_PUBLICATIONS_PENDING:
+        case GET_SUBSCRIBERS_PENDING:
             return {
                 ...state,
                 pending: true
             }
-        case GET_USER_PUBLICATIONS_SUCCESS:
+        case GET_SUBSCRIBERS_SUCCESS:
             return {
                 ...state,
                 pending: false,
-                publications: action.publications
+                subscribers: action.subscribers
             }
-        case GET_USER_PUBLICATIONS_ERROR:
+        case GET_SUBSCRIBERS_ERROR:
             return {
                 ...state,
                 pending: false,
@@ -85,3 +88,5 @@ export function publicationReducer(state = initialState, action) {
             return state;
     }
 }
+
+export default subscribtionReducer

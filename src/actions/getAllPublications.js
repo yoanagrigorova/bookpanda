@@ -9,12 +9,10 @@ function getAllPublications() {
                 if (res.error) {
                     throw (res.error);
                 }
-                console.log(res)
                 dispatch(getAllPublicationsSuccess(res));
                 return res;
             })
             .catch(error => {
-                console.log(error)
                 dispatch(getAllPublicationsError(error));
             })
     }

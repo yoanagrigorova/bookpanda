@@ -5,10 +5,8 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
-import { HashRouter as Router, Switch, Link } from 'react-router-dom';
-import { Route } from 'react-router';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import  { Redirect } from 'react-router-dom'
 
 import registration from '../../actions/registration';
 
@@ -183,17 +181,16 @@ class SignUpPage extends Component {
     this.props.registration(data);
     let self = this;
     setTimeout(()=>{
-      console.log(self.props.usersReducer.user)
       if(self.props.usersReducer.user){
-        self.props.history.push('/homePage/profilePage', self.props.usersReducer.user)
         let currUser = {
           id: self.props.usersReducer.user.id,
           username: self.props.usersReducer.user.username,
           email: self.props.usersReducer.user.email
         }
         window.localStorage.setItem("currentUser", JSON.stringify(currUser));
+        this.props.history.push('/homePage/profilePage/' + this.state.username, this.props.usersReducer.user);
       }
-    }, 500)
+    }, 700)
   }
 
   render() {

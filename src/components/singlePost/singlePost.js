@@ -34,7 +34,6 @@ class SinglePost extends Component {
 
     componentDidMount(){
         setTimeout(()=>{
-            console.log(this.props)
             this.setState({
                 publication:{
                     ...this.props.publicationReducer.publication,

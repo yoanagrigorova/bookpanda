@@ -9,7 +9,6 @@ function fetchUsers() {
             if(res.error) {
                 throw(res.error);
             }
-            console.log(res)
             dispatch(fetchUsersSuccess(res));
             return res;
         })

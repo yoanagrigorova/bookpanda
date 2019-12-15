@@ -2,18 +2,25 @@ import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
 import FaceIcon from '@material-ui/icons/Face';
-import {HashRouter as Router, Switch, Link} from 'react-router-dom';
-import { Route } from 'react-router';
+import { Link } from 'react-router-dom';
 import './profilePage.css';
 import PostCard from '../postCard/postCard';
 import { connect } from 'react-redux';
 import fetchUsers from "../../actions/fetchUsers"
+import getUserPublications from '../../actions/getUserPublications'
+import subscribe from '../../actions/subscribe'
+import getSubscriptions from '../../actions/getSubscriptions'
+import getSubscribers from '../../actions/getSubscribers'
 
 const mapStateToProps = state => ({
   ...state
 })
 const mapDispatchToProps = dispatch => ({
-  getUsers: () => dispatch(fetchUsers())
+  getUsers: () => dispatch(fetchUsers()),
+  getUserPublications: (userId) => dispatch(getUserPublications(userId)),
+  subscribe: (data) => dispatch(subscribe(data)),
+  getSubscriptions: (id) => dispatch(getSubscriptions(id)),
+  getSubscribers: (id) => dispatch(getSubscribers(id))
 })
 class profilePage extends Component {
 
@@ -64,11 +71,28 @@ class profilePage extends Component {
     super(props);
     this.props.getUsers();
     this.state = {
-      // currentUser : this.props.usersReducer.user ? this.props.usersReducer.user : JSON.parse(window.localStorage.getItem("currentUser")) 
       currentUser: JSON.parse(window.localStorage.getItem("currentUser")),
       user: JSON.parse(window.localStorage.getItem("currentUser")),
+      publications: [],
+      subsctiptions: 0,
+      subscribers: 0,
       mounted: false
     }
+    setTimeout(() => {
+      if (this.props.location.pathname.split("/")[3]) {
+        let user = this.props.usersReducer.users.find(user => user.username === this.props.location.pathname.split("/")[3])
+        if (user) {
+          this.props.getUserPublications(user.id);
+          this.props.getSubscriptions(user.id);
+          this.props.getSubscribers(user.id)
+        }
+      } else {
+        this.props.getUserPublications(this.state.currentUser.id)
+        this.props.getUserPublications(this.state.currentUser.id);
+          this.props.getSubscriptions(this.state.currentUser.id);
+          this.props.getSubscribers(this.state.currentUser.id)
+      }
+    }, 300)
   }
 
   componentDidMount() {
@@ -77,27 +101,57 @@ class profilePage extends Component {
     setTimeout(() => {
       if (self.props.location.pathname.split("/")[3]) {
         let user = this.props.usersReducer.users.find(user => user.username === self.props.location.pathname.split("/")[3]);
-        console.log(self.props.location.pathname.split("/")[3])
-        console.log(user)
-        console.log(this.props.usersReducer)
+        console.log(this.props)
         self.setState({
           user: user,
+          publications: this.props.publicationReducer.publications,
+          subsctiptions: this.props.subscribtionReducer.subscriptions,
+          subscribers: this.props.subscribtionReducer.subscribers,
           mounted: true
         })
       }
 
-    }, 400)
+    }, 500)
   }
 
-  componentWillUpdate(){
-    if(this.state.mounted && this.props.location.pathname.split("/")[3] !== this.state.user.username){
+  componentWillUpdate() {
+    if (this.state.mounted && this.props.location.pathname.split("/")[3] !== this.state.user.username) {
       let user = this.props.usersReducer.users.find(user => user.username === this.props.location.pathname.split("/")[3]);
-        console.log(user)
-        console.log(this.props.usersReducer)
-        this.setState({
-          user: user
-        })
+      this.setState({
+        user: user,
+      })
       return true;
+    }
+  }
+
+  convertMonth = (month) => {
+    switch (month) {
+      case 0:
+        return "Jan"
+      case 1:
+        return "Feb"
+      case 2:
+        return "Mar"
+      case 3:
+        return "Apr"
+      case 4:
+        return "May"
+      case 5:
+        return "Jun"
+      case 6:
+        return "Jul"
+      case 7:
+        return "Aug"
+      case 8:
+        return "Sep"
+      case 9:
+        return "Oct"
+      case 10:
+        return "Nov"
+      case 11:
+        return "Dec"
+      default:
+        return ""
     }
   }
 
@@ -106,13 +160,13 @@ class profilePage extends Component {
       <MuiThemeProvider theme={this.getMuiTheme()}>
         <div className="profilePage">
           <section className="userProfile">
-            <span className="userId"><FaceIcon className="userIcon"></FaceIcon>{this.state.user.username}</span>
+            <span className="userId"><FaceIcon className="userIcon"></FaceIcon>{this.state.user ? this.state.user.username : ''}</span>
             <div className="followers">
               <div className="label">
                 subsribers:
                       </div>
               <div className="numbers">
-                256
+              {this.state.subscribers}
                       </div>
             </div>
             <div className="following">
@@ -120,8 +174,8 @@ class profilePage extends Component {
                 subsribed to:
                       </div>
               <div className="numbers">
-                305
-                      </div>
+                {this.state.subsctiptions}
+              </div>
             </div>
             <div className="submitPostButton">
               {
@@ -130,19 +184,38 @@ class profilePage extends Component {
                     <Link to="/homePage/submitPage">Submit a post</Link>
                   </Button>
                   :
-                  <Button variant="outlined" color="primary">
+                  <Button variant="outlined" color="primary" onClick={() => {
+                    let data = {
+                      subscriber: {
+                        id: this.state.currentUser.id
+                      },
+                      subscribedTo: {
+                        id: this.state.user.id
+                      }
+                    }
+                    this.props.subscribe(data)
+                    this.setState({
+                      subscribers: this.state.subscribers+1
+                    })
+                  }}>
                     Subscribe
                   </Button>
               }
             </div>
           </section>
           <section className="userPosts">
-            {/* <PostCard
-              title="Lorem ipsum dolor sit amet"
-              author="author"
-              sampleText="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
-              date="Aug 10th 2019"
-            /> */}
+            {
+              this.state.publications && this.state.publications.reverse().map((publication) => (
+                <PostCard
+                  id={publication.id}
+                  title={publication.title}
+                  author={publication.user}
+                  sampleText={publication.text}
+                  date={this.convertMonth(new Date(publication.created).getMonth()) + " " + new Date(publication.created).getDate() + " " + new Date(publication.created).getFullYear()}
+                  key={publication.created}
+                />
+              ))
+            }
           </section>
         </div>
       </MuiThemeProvider>
