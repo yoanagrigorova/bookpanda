@@ -1,0 +1,26 @@
+.commentCard {
+    margin: 1em auto;
+    padding: 3% 10%;
+    width: 40%;
+    background-color: white;
+    position: relative;
+}
+
+.commentAuthor {
+    margin: 1em 0;
+    width: 100%;
+    color: #f2935c;
+    font-size: 1.5em;
+}
+
+.commentAuthor::after {
+    content: ' said: ';
+    font-size: 1rem;
+    color: rgba(0, 0, 0, 0.418);
+}
+
+.commentDate {
+    text-align: right;
+    font-size: 1rem;
+    color: rgba(0, 0, 0, 0.418);
+}

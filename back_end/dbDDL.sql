@@ -1,5 +1,5 @@
-CREATE DATABASE 'bookpanda';
-USE 'bookpanda';
+CREATE DATABASE bookpanda;
+USE bookpanda;
 
 CREATE TABLE `publication` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -11,7 +11,7 @@ CREATE TABLE `publication` (
   PRIMARY KEY (`id`),
   KEY `FK_USERID_USERS_idx` (`user_id`),
   CONSTRAINT `FK_USERS_USERID` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -33,12 +33,12 @@ CREATE TABLE `comment` (
   KEY `FK_COMMENT_PUBLICATION_idx` (`publicationId`),
   CONSTRAINT `FK_COMMENT_PUBLICATION` FOREIGN KEY (`publicationId`) REFERENCES `publication` (`id`),
   CONSTRAINT `FK_COMMENT_USER` FOREIGN KEY (`userId`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE `subscription` (
-  `subscriber_id` int(11) NOT NULL,
-  `subscribed_to_id` int(11) NOT NULL,
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE subscription (
+  subscriber_id int(11) NOT NULL,
+  subscribed_to_id int(11) NOT NULL,
+  id int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
 

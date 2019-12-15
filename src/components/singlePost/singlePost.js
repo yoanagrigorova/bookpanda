@@ -5,6 +5,8 @@ import fetchUsers from "../../actions/fetchUsers"
 import './singlePost.css';
 import { connect } from 'react-redux';
 import {Link} from "react-router-dom";
+import CommentCard from '../commentCard/commentCard';
+import CommentInput from '../commentCard/commentInput';
 
 const mapStateToProps = state => ({
     ...state
@@ -75,7 +77,9 @@ class SinglePost extends Component {
       }
 
     render() {
+      const avi = {username: 'avi'}
         return (
+          <div className="postContent">
             <div className="singlePost">
                 <div className="singlePostTitle">
                     {this.state.publication ? this.state.publication.title : ""}
@@ -87,6 +91,9 @@ class SinglePost extends Component {
                     {this.state.publication ? this.state.publication.text: ""}
                 </div>
             </div>
+            <CommentInput author={avi} ></CommentInput>
+            <CommentCard  author={avi} sampleText =" sflkjsflkjafjaflkakfljasfklajf" date="14.07.2019"></CommentCard>
+          </div>
         )
     }
 }
